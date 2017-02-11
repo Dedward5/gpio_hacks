@@ -9,7 +9,7 @@ GPIO.setup(17,GPIO.IN) #set up pin 17 for input
 while True:
   if GPIO.input(17): # if PIN 17 is HIGH which ==1 then
     print ("No input")
-    else 
+  else 
     print("Button Pressed")
     
 
