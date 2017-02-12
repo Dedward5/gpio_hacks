@@ -3,9 +3,9 @@
 
 
 ##### Import libraries #####
-
+# from __future__ import division
 import RPi.GPIO as GPIO
-from time import sleep #enables sleep which is used later on
+import time
 
 
 ##### Setup GPIO on the PI #####
@@ -15,12 +15,20 @@ GPIO.setup(17,GPIO.IN) #set up pin 17 for input (button)
 
 ##### Setup variable ######
 pulses = 0
+last_pulse = time.time ()
+pulse_gap = 1
+rpm = 0
 
 ##### Functions and callbacks #####
 def tacho_pulse (channel): # a callback thats called when GPIO Pin 17 rises
 	global pulses
-	print ("Pulse")
+	global last_pulse
+	global pulse_gap
+	global rpm
+	pulse_gap = time.time() - last_pulse	
+	last_pulse = time.time ()
 	pulses +=1 
+	rpm = 60.0 / pulse_gap 
 
 ##### Create callback for puse detection #####
 
@@ -30,9 +38,12 @@ GPIO.add_event_detect(17, GPIO.RISING, callback=tacho_pulse) #call callback whe$
 ##### Main program ######
 
 
-while pulses < 15:
+while pulses <20:
 
-	print(pulses)
+	print("Pulses",pulses)
+	print("Pulse Gap",pulse_gap)
+	print("RPM",rpm)
+
 
 
 GPIO.cleanup() # cleanup the GPIO on exit
