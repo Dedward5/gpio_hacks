@@ -1,6 +1,8 @@
 # Scrit to initiate GPIO and count how many times a button is pressed per min
 # See https://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/robot/buttons_and_switches/
 
+# 20th Feb 2017
+
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 
