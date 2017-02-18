@@ -6,7 +6,7 @@
 # from __future__ import division
 import RPi.GPIO as GPIO
 import time
-
+import os
 
 ##### Setup GPIO on the PI #####
 
@@ -38,14 +38,16 @@ GPIO.add_event_detect(17, GPIO.RISING, callback=tacho_pulse) #call callback whe$
 ##### Main program ######
 
 
-while pulses <20:
+try:
 
 	print("Pulses",pulses)
 	print("Pulse Gap",pulse_gap)
 	print("RPM",rpm)
+	time.sleep(0.5)
+	os.system('clear')
 
-
-
+except KeyboardInterrupt:
+print("cleanup and goodbye!")
 GPIO.cleanup() # cleanup the GPIO on exit
 
   
