@@ -27,8 +27,8 @@ def tacho_pulse (channel): # a callback thats called when GPIO Pin 17 rises
 	global rpm
 	pulse_gap = time.time() - last_pulse	
 	last_pulse = time.time ()
-	pulses +=1 
-	rpm = 60.0 / pulse_gap 
+	# pulses +=1 
+	rpm = 0.5 / pulse_gap 
 
 ##### Create callback for puse detection #####
 
@@ -40,9 +40,9 @@ GPIO.add_event_detect(17, GPIO.RISING, callback=tacho_pulse) #call callback whe$
 
 while pulses <20:
 
-	print("Pulses",pulses)
-	print("Pulse Gap",pulse_gap)
-	print("RPM",rpm)
+	# print("Pulses",pulses)
+	# print("Pulse Gap",pulse_gap)
+	print("RPM",int(rpm*60))
 
 
 
